@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -40,7 +39,6 @@ export const PatientForm = () => {
       };
 
       const newUser = await createUser(user);
-      console.log(newUser);
 
       if (newUser) {
         router.push(`/patients/${newUser.$id}/register`);

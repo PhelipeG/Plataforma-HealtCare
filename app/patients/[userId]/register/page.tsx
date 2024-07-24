@@ -1,14 +1,9 @@
-
 import { getPatient, getUser } from "@/actions/patient.actions";
 import { RegisterForm } from "@/components/forms/RegisterForm";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-
-
-
 const Register = async ({ params: { userId } }: SearchParamProps) => {
-  const user = await getUser(userId);
   const patient = await getPatient(userId);
 
   if(patient) redirect(`/patients/${userId}/new-appointment`); 
@@ -24,8 +19,8 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
             alt="patient"
             className="mb-12 h-10 w-fit"
           />
-
-          <RegisterForm user={user} />
+          <RegisterForm userId={userId} />
+          
 
           <p className="copyright py-12">© 2024 CarePluse</p>
         </div>

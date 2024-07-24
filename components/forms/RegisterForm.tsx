@@ -23,17 +23,24 @@ import { SelectItem } from "../ui/select";
 import { FileUploader } from "../FileUploader";
 import { registerPatient } from "@/actions/patient.actions";
 
-export const RegisterForm = ({ user }: { user: User }) => {
+
+interface RegisterFormProps {
+  userId: string;
+}
+
+
+
+export const RegisterForm = ({ userId }: RegisterFormProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
+ 
   const form = useForm<z.infer<typeof PatientFormValidation>>({
     resolver: zodResolver(PatientFormValidation),
     defaultValues: {
       ...PatientFormDefaultValues,
-      name: '',
-      email: '',
-      phone: '',
+      name: "",
+      email: "",
+      phone: "",
     },
   });
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
@@ -53,10 +60,10 @@ export const RegisterForm = ({ user }: { user: User }) => {
       formData.append("blobFile", blobFile);
       formData.append("fileName", values.identificationDocument[0].name);
     }
-
+   
     try {
       const patient = {
-        userId: user.$id,
+        userId: userId,
         name: values.name,
         email: values.email,
         phone: values.phone,
@@ -84,7 +91,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
       const newPatient = await registerPatient(patient);
 
       if (newPatient) {
-        router.push(`/patients/${user.$id}/new-appointment`);
+        router.push(`/patients/${userId}/new-appointment`);
       }
     } catch (error) {
       console.log(error);
