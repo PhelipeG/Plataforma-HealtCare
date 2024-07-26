@@ -54,7 +54,7 @@ export const getPatient = async (userId: string) => {
     console.error(
       "An error occurred while retrieving the patient details:",
       error
-    );
+    );  
   }
 };
 export const registerPatient = async ({
@@ -95,3 +95,4 @@ export const registerPatient = async ({
   }
 };
 
+getPatient('').then((res) => console.log(res));

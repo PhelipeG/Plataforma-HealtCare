@@ -23,7 +23,6 @@ import { SelectItem } from "../ui/select";
 import { FileUploader } from "../FileUploader";
 import { registerPatient } from "@/actions/patient.actions";
 
-
 interface RegisterFormProps {
   userId: string;
 }
@@ -33,6 +32,8 @@ interface RegisterFormProps {
 export const RegisterForm = ({ userId }: RegisterFormProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  
  
   const form = useForm<z.infer<typeof PatientFormValidation>>({
     resolver: zodResolver(PatientFormValidation),

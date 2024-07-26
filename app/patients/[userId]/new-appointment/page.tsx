@@ -5,7 +5,6 @@ import Image from "next/image";
 export default async function Appointment({params : {userId}} : SearchParamProps) {
 
   const patient = await getPatient(userId);
-  console.log(patient)
 
   return (
     <div className="flex h-screen max-h-screen">
@@ -17,9 +16,9 @@ export default async function Appointment({params : {userId}} : SearchParamProps
             width={1000}
             alt="logo"
             className="mb-12 h-10 w-fit"
-          />
+          />  
           <AppointmentForm
-            patientId={patient?.$id}
+            patientId={userId}
             userId={userId}
             type="create"
           />
