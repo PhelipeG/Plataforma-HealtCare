@@ -53,15 +53,14 @@ export const PatientForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
         <section className="mb-12 space-y-4">
-          <h1 className="header">Hi there 👋</h1>
-          <p className="text-dark-700">Get started with appointments.</p>
+          <h1 className="header">Ola seja bem vindo 👋</h1>
         </section>
 
         <CustomFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
           name="name"
-          label="Full name"
+          label="Nome Completo"
           placeholder="John Doe"
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
@@ -81,11 +80,11 @@ export const PatientForm = () => {
           fieldType={FormFieldType.PHONE_INPUT}
           control={form.control}
           name="phone"
-          label="Phone number"
+          label="Telefone"
           placeholder="(555) 123-4567"
         />
 
-        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+        <SubmitButton isLoading={isLoading}>Vamos Iniciar</SubmitButton>
       </form>
     </Form>
   );

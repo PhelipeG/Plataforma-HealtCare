@@ -7,7 +7,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
   const patient = await getPatient(userId);
  
   if(patient) redirect(`/patients/${userId}/new-appointment`);  //se o paciente já existir, redireciona para a página de agendamento 
-
+  
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container">
