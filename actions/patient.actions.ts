@@ -1,11 +1,21 @@
-'use server';
+"use server";
 
-import { BUCKET_ID, DATABASE_ID, databases, ENDPOINT, PATIENT_COLLECTION_ID, PROJECT_ID, storage, users } from "@/lib/appwrite.config";
+import { ID, InputFile, Query } from "node-appwrite";
+
+import {
+  BUCKET_ID,
+  DATABASE_ID,
+  ENDPOINT,
+  PATIENT_COLLECTION_ID,
+  PROJECT_ID,
+  databases,
+  storage,
+  users,
+} from "../lib/appwrite.config";
 import { parseStringify } from "@/lib/utils";
-import { ID, Permission, Query } from "node-appwrite";
-import {InputFile} from 'node-appwrite/file';
 
 
+// CREATE APPWRITE USER
 export const createUser = async (user: CreateUserParams) => {
   try {
     // Create new user -> https://appwrite.io/docs/references/1.5.x/server-nodejs/users#create
@@ -31,32 +41,21 @@ export const createUser = async (user: CreateUserParams) => {
   }
 };
 
+// GET USER
 export const getUser = async (userId: string) => {
   try {
-    const user = await users.get(userId)
-    return parseStringify(user)
-  } catch (error) {
-    console.error("An error occurred while retrieving the user details:", error);
-  }
+    const user = await users.get(userId);
 
-}
-
-export const getPatient = async (userId: string) => {
-  try {
-    const patients = await databases.listDocuments(
-      DATABASE_ID!,
-      PATIENT_COLLECTION_ID!,
-      [Query.equal("userId", [userId])]
-    );
-
-    return parseStringify(patients.documents[0]); // retorna o primeiro paciente encontrado
+    return parseStringify(user);
   } catch (error) {
     console.error(
-      "An error occurred while retrieving the patient details:",
+      "An error occurred while retrieving the user details:",
       error
-    );  
+    );
   }
 };
+
+// REGISTER PATIENT
 export const registerPatient = async ({
   identificationDocument,
   ...patient
@@ -67,7 +66,7 @@ export const registerPatient = async ({
     if (identificationDocument) {
       const inputFile =
         identificationDocument &&
-        InputFile.fromBuffer(
+        InputFile.fromBlob(
           identificationDocument?.get("blobFile") as Blob,
           identificationDocument?.get("fileName") as string
         );
@@ -95,4 +94,20 @@ export const registerPatient = async ({
   }
 };
 
-getPatient('').then((res) => console.log(res));
+// GET PATIENT
+export const getPatient = async (userId: string) => {
+  try {
+    const patients = await databases.listDocuments(
+      DATABASE_ID!,
+      PATIENT_COLLECTION_ID!,
+      [Query.equal("userId", [userId])]
+    );
+
+    return parseStringify(patients.documents[0]);
+  } catch (error) {
+    console.error(
+      "An error occurred while retrieving the patient details:",
+      error
+    );
+  }
+};

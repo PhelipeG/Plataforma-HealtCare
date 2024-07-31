@@ -24,7 +24,7 @@ export const PasskeyModal = () => {
   // pega a chave de acesso encriptada do localStorage
   const encriptedKey =
     typeof window !== "undefined"
-      ? window.localStorage.getItem("acessKey")
+      ? window.localStorage.getItem("accessKey")
       : "";
 
   useEffect(() => {
