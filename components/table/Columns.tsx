@@ -1,9 +1,12 @@
+'use client';
+
 import { Doctors } from "@/constants";
 import { formatDateTime } from "@/lib/utils";
 import { Appointment } from "@/types/appwrite.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { StatusBadge } from "../StatusBadge";
 import Image from "next/image";
+import { AppointmentModal } from "../forms/AppointmentModal";
 
 export const columns: ColumnDef<Appointment>[] = [
   {
@@ -14,15 +17,15 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "Paciente",
-    header: "Patient",
+    header: "Nome do Paciente",
     cell: ({ row }) => {
       const appointment = row.original;
-      return <p className="text-14-medium ">{appointment.patient.name}</p>;
+      return <p className="text-14-medium ">{appointment.patient.name ? appointment.patient.name : 'sem nome'}</p>;
     },
   },
   {
     accessorKey: "Status",
-    header: "Status",
+    header: "Status da Consulta",
     cell: ({ row }) => {
       const appointment = row.original;
       return (
@@ -34,7 +37,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "Agendamento",
-    header: "Appointment",
+    header: "Agendamento",
     cell: ({ row }) => {
       const appointment = row.original;
       return (
@@ -46,7 +49,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "Medico Escolhido",
-    header: "Doctor",
+    header: "Medico",
     cell: ({ row }) => {
       const appointment = row.original;
 
@@ -64,6 +67,34 @@ export const columns: ColumnDef<Appointment>[] = [
             className="size-8"
           />
           <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
+        </div>
+      );
+    },
+  },
+  {
+    id: "actions",
+    header: () => <div className="pl-4">Açoes</div>,
+    cell: ({ row }) => {
+      const appointment = row.original;
+
+      return (
+        <div className="flex gap-1">
+          <AppointmentModal
+            patientId={appointment.patient.$id}
+            userId={appointment.userId}
+            appointment={appointment}
+            type="schedule"
+            title="Agendar consulta"
+            description="Por favor confirme os detalhes da sua consulta"
+          />
+          <AppointmentModal
+            patientId={appointment.patient.$id}
+            userId={appointment.userId}
+            appointment={appointment}
+            type="cancel"
+            title="Cancelar Consulta"
+            description="Voce tem certeza que deseja cancelar sua consulta?"
+          />
         </div>
       );
     },

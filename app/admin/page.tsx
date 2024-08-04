@@ -3,12 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { StatCard } from "@/components/StatCard";
 import { getRecentAppointmentList } from "@/actions/appointment.actions";
+import { DataTable } from "@/components/table/DataTable";
+import { columns } from "@/components/table/Columns";
 
-const AdminDashboard = async  () => {
-
+const AdminDashboard = async () => {
   const appointments = await getRecentAppointmentList();
-  console.log(appointments);
-
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -33,27 +32,28 @@ const AdminDashboard = async  () => {
         </section>
 
         <section className="admin-stat">
-         <StatCard
+          <StatCard
             type="appointments"
             count={appointments.scheduledCount}
             label="Consultas agendadas"
             icon={"/assets/icons/appointments.svg"}
-          /> 
-         <StatCard
+          />
+          <StatCard
             type="pending"
             count={appointments.pendingCount}
             label="Consultas pendentes"
             icon={"/assets/icons/pending.svg"}
-          /> 
+          />
           <StatCard
             type="cancelled"
-            count={appointments.cancelledCount ? appointments.cancelledCount : 0}
+            count={
+              appointments.cancelledCount ? appointments.cancelledCount : 0
+            }
             label="Consultas canceladas"
             icon={"/assets/icons/cancelled.svg"}
           />
         </section>
-
-
+        <DataTable columns={columns} data={appointments.documents} />
       </main>
     </div>
   );

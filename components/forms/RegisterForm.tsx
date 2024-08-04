@@ -1,4 +1,5 @@
 "use client";
+
 import { useForm } from "react-hook-form";
 import { Form, FormControl } from "../ui/form";
 import { Label } from "../ui/label";
@@ -28,13 +29,9 @@ interface RegisterFormProps {
 }
 
 
-
 export const RegisterForm = ({ userId }: RegisterFormProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
-  
- 
   const form = useForm<z.infer<typeof PatientFormValidation>>({
     resolver: zodResolver(PatientFormValidation),
     defaultValues: {
@@ -108,13 +105,13 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
         className="flex-1 space-y-12"
       >
         <section className="space-y-4">
-          <h1 className="header">Welcome 👋</h1>
-          <p className="text-dark-700">Let us know more about yourself.</p>
+          <h1 className="header">Seja bem vindo😊❤️</h1>
+          <p className="text-dark-700">Deixe-nos saber mais sobre você.</p>
         </section>
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Personal Information</h2>
+            <h2 className="sub-header">Informaçoes Pessoais</h2>
           </div>
 
           {/* NAME */}
@@ -134,7 +131,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="email"
-              label="Email address"
+              label="Endereço de Email"
               placeholder="johndoe@gmail.com"
               iconSrc="/assets/icons/email.svg"
               iconAlt="email"
@@ -144,7 +141,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="phone"
-              label="Phone Number"
+              label="Numero de Telefone"
               placeholder="(555) 123-4567"
             />
           </div>
@@ -155,14 +152,14 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.DATE_PICKER}
               control={form.control}
               name="birthDate"
-              label="Date of birth"
+              label="Data de Aniversario"
             />
 
             <CustomFormField
               fieldType={FormFieldType.SKELETON}
               control={form.control}
               name="gender"
-              label="Gender"
+              label="Genero"
               renderSkeleton={(field) => (
                 <FormControl>
                   <RadioGroup
@@ -198,7 +195,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="occupation"
-              label="Occupation"
+              label="Trabalho"
               placeholder=" Software Engineer"
             />
           </div>
@@ -209,7 +206,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="emergencyContactName"
-              label="Emergency contact name"
+              label="Nome do contato de emergencia"
               placeholder="Guardian's name"
             />
 
@@ -217,7 +214,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="emergencyContactNumber"
-              label="Emergency contact number"
+              label="Numero de contato de emergencia"
               placeholder="(555) 123-4567"
             />
           </div>
@@ -225,7 +222,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Medical Information</h2>
+            <h2 className="sub-header">Informacoes do Medico</h2>
           </div>
 
           {/* PRIMARY CARE PHYSICIAN */}
@@ -233,8 +230,8 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
             fieldType={FormFieldType.SELECT}
             control={form.control}
             name="primaryPhysician"
-            label="Primary care physician"
-            placeholder="Select a physician"
+            label="Selecione seu medico"
+            placeholder="Selecione um dos medicos disponiveis"
           >
             {Doctors.map((doctor, i) => (
               <SelectItem key={doctor.name + i} value={doctor.name}>
@@ -258,7 +255,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="insuranceProvider"
-              label="Insurance provider"
+              label="Provedor de Seguro"
               placeholder="BlueCross BlueShield"
             />
 
@@ -266,7 +263,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="insurancePolicyNumber"
-              label="Insurance policy number"
+              label="Numero da apolice de seguro"
               placeholder="ABC123456789"
             />
           </div>
@@ -277,7 +274,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="allergies"
-              label="Allergies (if any)"
+              label="Alergias(se tiver alguma)"
               placeholder="Peanuts, Penicillin, Pollen"
             />
 
@@ -285,7 +282,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="currentMedication"
-              label="Current medications"
+              label="Medicamentos atuais"
               placeholder="Ibuprofen 200mg, Levothyroxine 50mcg"
             />
           </div>
@@ -296,7 +293,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="familyMedicalHistory"
-              label=" Family medical history (if relevant)"
+              label="Historico medico da familia"
               placeholder="Mother had brain cancer, Father has hypertension"
             />
 
@@ -304,7 +301,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="pastMedicalHistory"
-              label="Past medical history"
+              label="Historico de medico passado"
               placeholder="Appendectomy in 2015, Asthma diagnosis in childhood"
             />
           </div>
@@ -312,7 +309,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Identification and Verfication</h2>
+            <h2 className="sub-header">Identificaçao e Verificaçao</h2>
           </div>
 
           <CustomFormField
@@ -320,7 +317,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
             control={form.control}
             name="identificationType"
             label="Identification Type"
-            placeholder="Select identification type"
+            placeholder="Selecione o tipo de indentificacao"
           >
             {IdentificationTypes.map((type, i) => (
               <SelectItem key={type + i} value={type}>
@@ -333,7 +330,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="identificationNumber"
-            label="Identification Number"
+            label="Numero de identificacao"
             placeholder="123456789"
           />
 
@@ -341,7 +338,7 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
             fieldType={FormFieldType.SKELETON}
             control={form.control}
             name="identificationDocument"
-            label="Scanned Copy of Identification Document"
+            label="Cópia digitalizada do documento de identificação"
             renderSkeleton={(field) => (
               <FormControl>
                 <FileUploader files={field.value} onChange={field.onChange} />
@@ -352,34 +349,32 @@ export const RegisterForm = ({ userId }: RegisterFormProps) => {
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Consent and Privacy</h2>
+            <h2 className="sub-header">Consentimento e Privacidade</h2>
           </div>
 
           <CustomFormField
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="treatmentConsent"
-            label="I consent to receive treatment for my health condition."
+            label="Autorizo ​​receber tratamento para o meu estado de saúde."
           />
 
           <CustomFormField
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="disclosureConsent"
-            label="I consent to the use and disclosure of my health
-        information for treatment purposes."
+            label="Concordo com o uso e divulgação das minhas informações de saúde para fins de tratamento"
           />
 
           <CustomFormField
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="privacyConsent"
-            label="I acknowledge that I have reviewed and agree to the
-        privacy policy"
+            label="Reconheço que li e concordo com a política de privacidade"
           />
         </section>
 
-        <SubmitButton isLoading={isLoading}>Submit and Continue</SubmitButton>
+        <SubmitButton isLoading={isLoading}>Submeter e Continuar</SubmitButton>
       </form>
     </Form>
   );

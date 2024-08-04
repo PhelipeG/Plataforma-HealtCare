@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { getAppointmentSchema } from "@/lib/validation";
 import SubmitButton from "./SubmitButton";
 import "react-datepicker/dist/react-datepicker.css";
-import { createAppointment } from "@/actions/appointment.actions";
+import { createAppointment, updateAppointment } from "@/actions/appointment.actions";
 import { useRouter } from "next/navigation";
 
 
@@ -93,12 +93,12 @@ export const AppointmentForm = ({
           type,
         };
 
-        // const updatedAppointment = await updateAppointment(appointmentToUpdate);
+        const updatedAppointment = await updateAppointment(appointmentToUpdate);
 
-        // if (updatedAppointment) {
-        //   setOpen && setOpen(false);
-        //   form.reset();
-        // }
+        if (updatedAppointment) {
+          setOpen && setOpen(false);
+          form.reset();
+        }
       }
     } catch (error) {
       console.log(error);
@@ -112,7 +112,7 @@ export const AppointmentForm = ({
       buttonLabel = "Cancelar Consulta";
       break;
     case "schedule":
-      buttonLabel = "Schedule Appointment";
+      buttonLabel = "Agendar Consulta";
       break;
     default:
       buttonLabel = "Registrar Consulta";
@@ -193,8 +193,8 @@ export const AppointmentForm = ({
             fieldType={FormFieldType.TEXTAREA}
             control={form.control}
             name="cancellationReason"
-            label="Reason for cancellation"
-            placeholder="Urgent meeting came up"
+            label="Razão para cancelamento"
+            placeholder="Ex: Reuniao marcada no dia e horario"
           />
         )}
 

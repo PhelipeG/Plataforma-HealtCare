@@ -11,8 +11,10 @@ export default async function Success({
 }: SearchParamProps) {
   const appointmentId = (searchParams?.appointmentId as string) || "";
   const appointment = await getAppointment(appointmentId);
-  const doctor = Doctors.find((doc) => doc.name === appointment.primaryPhysician)
-  
+  const doctor = Doctors.find(
+    (doc) => doc.name === appointment.primaryPhysician
+  );
+
   return (
     <div className=" flex h-screen max-h-screen px-[5%]">
       <div className="success-img">
@@ -60,15 +62,20 @@ export default async function Success({
               width={24}
               alt="calendar"
             />
-            <p> {formatDateTime(appointment.schedule).dateTime}</p>
+            <p>{formatDateTime(appointment.schedule).dateTime}</p>
           </div>
         </section>
+        <div className="flex">
+          <Button variant="outline" className="shad-primary-btn mr-3" asChild>
+            <Link href={`/patients/${userId}/new-appointment`}>
+              Nova Consulta
+            </Link>
+          </Button>
 
-        <Button variant="outline" className="shad-primary-btn" asChild>
-          <Link href={`/patients/${userId}/new-appointment`}>
-            New Appointment
-          </Link>
-        </Button>
+          <Button variant="outline" className="shad-primary-btn" asChild>
+            <Link href={"/"}>Página inicial</Link>
+          </Button>
+        </div>
 
         <p className="copyright">© 2024 CarePluse</p>
       </div>
