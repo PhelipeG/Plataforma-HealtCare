@@ -53,5 +53,6 @@ declare type UpdateAppointmentParams = {
   userId: string;
   appointment: Appointment;
   type: string;
+
 };
 // esse arquivo se trata de um arquivo de tipagem, onde definimos os tipos de dados que serão utilizados em nossa aplicação no appwrite das actions

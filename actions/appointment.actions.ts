@@ -4,11 +4,14 @@ import {
   APPOINTMENT_COLLECTION_ID,
   DATABASE_ID,
   databases,
+  messaging,
 } from "@/lib/appwrite.config";
-import { parseStringify } from "@/lib/utils";
+import { formatDateTime, parseStringify } from "@/lib/utils";
 import { Appointment } from "@/types/appwrite.types";
 import { revalidatePath } from "next/cache";
 import { ID, Query } from "node-appwrite";
+import { getPatient } from "./patient.actions";
+
 
 export const createAppointment = async (
   appointment: CreateAppointmentParams
@@ -108,6 +111,19 @@ export const getRecentAppointmentList = async () => {
     );
   }
 };
+export const sendSMSNotification = async (userId: string, content: string) => {
+  try{
+    const message = await messaging.createSms(
+      ID.unique(),
+      content,
+      [],
+      [userId]
+    );
+    return parseStringify(message);  
+  }catch(error){
+    console.error("An error occurred while sending SMS notification:", error);
+  }
+}
 export const updateAppointment = async ({
   appointmentId,
   userId,
@@ -124,9 +140,11 @@ export const updateAppointment = async ({
     );
 
     if (!updatedAppointment) throw Error;
+    const namePatiente = await getPatient(userId);
 
-    // const smsMessage = `Greetings from CarePulse. ${type === "schedule" ? `Your appointment is confirmed for ${formatDateTime(appointment.schedule!, timeZone).dateTime} with Dr. ${appointment.primaryPhysician}` : `We regret to inform that your appointment for ${formatDateTime(appointment.schedule!, timeZone).dateTime} is cancelled. Reason:  ${appointment.cancellationReason}`}.`;
-    // await sendSMSNotification(userId, smsMessage);
+    const smsMessage = `Obrigado ${namePatiente.name} por escolher a HealtCare. ${type === "schedule" ? `Sua consulta foi marcada para ${formatDateTime(appointment.schedule!).dateTime} com o medico(a) Dr. ${appointment.primaryPhysician}` : `Sua consulta foi${formatDateTime(appointment.schedule!).dateTime}cancelada.Motivo :${appointment.cancellationReason}`}.`;
+
+    await sendSMSNotification(userId, smsMessage);
 
     revalidatePath("/admin");
     return parseStringify(updatedAppointment);

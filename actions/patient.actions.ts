@@ -111,3 +111,6 @@ export const getPatient = async (userId: string) => {
     );
   }
 };
+getUser('66b3e05c000e31d7a928').then((user) => {
+  console.log(user);
+});
