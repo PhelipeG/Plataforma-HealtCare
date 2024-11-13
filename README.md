@@ -17,10 +17,10 @@
 
 ## 📋 <a name="table">Table of Contents</a>
 
-1. 🤖 [Introduction](#introduction)
-2. ⚙️ [Tech Stack](#tech-stack)
-3. 🔋 [Features](#features)
-4. 🤸 [Quick Start](#quick-start)
+1. 🤖 [Introduçao](#introduction)
+2. ⚙️ [Stack](#tech-stack)
+3. 🔋 [Funcionalidades](#features)
+4. 🤸 [Iniciar](#quick-start)
 
 
 ## <a name="tech-stack">⚙️Stack usada</a>
